@@ -18,15 +18,17 @@ class Cell:
         self.s_value = []
 
     def set_sketched_value(self, value):
-        if (value not in self.s_value) and (0 < value < 10):  # Prevents duplicate values and ensures they're proper
+        if value in self.s_value:
+            self._remove_sketched_value(value)
+        elif 0 < value < 10:  # Prevents duplicate values and ensures they're proper
             self.s_value.append(value)
+
+    def _remove_sketched_value(self, value):
+        while value in self.s_value:
+            self.s_value.remove(value)
 
     def clear_sketched_values(self):
         self.s_value.clear()
-
-    def remove_sketched_value(self, value):
-        while value in self.s_value:
-            self.s_value.remove(value)
 
     def draw(self):
         # Sets up the cell surface and fills it with white
